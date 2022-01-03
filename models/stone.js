@@ -4,6 +4,7 @@ const User = require('./user');
 const stoneSchema = new Schema({
   title: String,
   body: String,
+  imageURL: String,
   filelink: String,
   Filerequired: Boolean,
   reward: Number,

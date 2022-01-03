@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="/stylesheets/app.css" />
   </head>
   <body>
-    <div id="leftdiv" class="body-c d-flex text-center text-white">
+    <div class="body-c d-flex text-center text-white">
       <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <%- include('../partials/navbar')%> <%- include('../partials/flash')%>
         <%- body%> <%- include('../partials/footer')%>
@@ -41,23 +41,5 @@
     ></script>
 
     <script src="/javascripts/particlejs.js"></script>
-    <script>
-      var right = document.getElementsByClassName('particles-js-canvas-el')[0]
-        .style.height;
-      var leftp = document.getElementById('leftdiv');
-      var left = window.getComputedStyle(leftp).height;
-      if (left > right) {
-        document.getElementsByClassName(
-          'particles-js-canvas-el',
-        )[0].style.height = left;
-        console.log(
-          document.getElementsByClassName('particles-js-canvas-el')[0].style
-            .height,
-        );
-      } else {
-        document.getElementById('leftdiv').style.height = right;
-        console.log(document.getElementById('particles-js').style);
-      }
-    </script>
   </body>
 </html>

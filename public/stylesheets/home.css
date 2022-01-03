@@ -1,4 +1,5 @@
 body {
+  height: 100vh;
   background-size: cover;
   background-position: center;
   text-shadow: 0 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
