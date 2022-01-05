@@ -7,7 +7,8 @@
     <h5 class="card-title">Collect All the stones to win!</h5>
     <br />
     <div class="container d-flex flex-wrap justify-content-around" style="">
-      <div class="card text-white bg-info mb-3" style="max-width: 18rem">
+      <% for (let i in stones) {%>
+      <div class="card text-white <%= colorc[i] %> mb-3" style="max-width: 18rem">
         <div class="card-header">
           <a
             href="#"
@@ -15,11 +16,11 @@
             data-toggle="modal"
             data-target="#exampleModalCenter"
           >
-            EK AUR STONE
+          <%= stones[i].name %>
           </a>
         </div>
         <div class="card-body">
-          <h5 class="card-title">Info card title</h5>
+          <h5 class="card-title"><%= stones[i].title %></h5>
           <p class="card-text">
             Some quick example text to build on the card title and make up the
             bulk of the card's content.
@@ -39,7 +40,7 @@
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLongTitle">
-                    Modal title
+                    <%= stones[i].title %>
                   </h5>
                   <button
                     type="button"
@@ -53,27 +54,30 @@
                 <div class="modal-body">
                   <img
                     class="card-img-top"
-                    src="https://cdn.sparkfun.com/assets/d/9/e/1/c/51c8bb1ece395fef60000001.png"
+                    src="<%= stones[i].imageURL %>"
                     alt="Card image cap"
                   />
-                  <p class="card-text">
-                    Some quick example text to build on the card title and make
-                    up the bulk of the card's content.
+                  <p class="card-text"><%= stones[i].body %>
                   </p>
-                  <a href="#">File link</a>
-                  <form>
+                  <% if(stones[i].Filerequired > 0) { %>  
+                  <a href="<%= stones[i].filelink %>">File link</a>
+                  <% } %>  
+                  <p class="card-text">Hint: <%= stones[i].hint %>
+                  </p>
+                  <form action="/stones/<%= stones[i]._id %>/" method="POST" class='validated-form' novalidate>
                     <div class="form-group">
-                      <label for="exampleInputPassword1">Answer</label>
+                      <label for="AnswerStone">Answer</label>
                       <input
+                        name="AnswerStone"
                         type="text"
                         class="form-control"
-                        id="AnswerStone1"
-                        placeholder="text"
+                        id="AnswerStone"
+                        placeholder="Answer"
                       />
                     </div>
                 </div>
                 <div class="modal-footer">
-                  <button type="submit" class="btn btn-primary">
+                  <button class="btn btn-primary">
                     Submit
                   </button>
                   <button
@@ -83,7 +87,6 @@
                   >
                     Close
                   </button>
-                  
                 </div>
               </form>
               </div>
@@ -91,56 +94,10 @@
           </div>
         </div>
       </div>
-      <div class="card text-white bg-primary mb-3" style="max-width: 18rem">
-        <div class="card-header">IDK STONE</div>
-        <div class="card-body">
-          <h5 class="card-title">Primary card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <div class="card text-white bg-secondary mb-3" style="max-width: 18rem">
-        <div class="card-header">Space Stone</div>
-        <div class="card-body">
-          <h5 class="card-title">Secondary card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <div class="card text-white bg-success mb-3" style="max-width: 18rem">
-        <div class="card-header">Soul Stone</div>
-        <div class="card-body">
-          <h5 class="card-title">Success card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <div class="card text-white bg-danger mb-3" style="max-width: 18rem">
-        <div class="card-header">Mind Stone</div>
-        <div class="card-body">
-          <h5 class="card-title">Danger card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <div class="card text-white bg-warning mb-3" style="max-width: 18rem">
-        <div class="card-header">Time Stone</div>
-        <div class="card-body">
-          <h5 class="card-title">Warning card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
+      <%} %>
+      <!-- ohoo -->
     </div>
   </div>
 </div>
+
+<!-- https://cdn.sparkfun.com/assets/d/9/e/1/c/51c8bb1ece395fef60000001.png -->

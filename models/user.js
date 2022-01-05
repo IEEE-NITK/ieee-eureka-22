@@ -9,6 +9,7 @@ const UserSchema = new Schema({
   },
   lastSubmission: {
     type: Date,
+    Default: '-',
   },
   submissions: [
     {

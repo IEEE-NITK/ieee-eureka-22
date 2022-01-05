@@ -3,27 +3,51 @@ const User = require('../models/user');
 
 module.exports.index = async (req, res) => {
   const stones = await Stone.find({});
-  res.render('stones/index', { stones });
+  const colorc = [
+    'bg-info',
+    'bg-primary',
+    'bg-secondary',
+    'bg-success',
+    'bg-danger',
+    'bg-warning',
+  ];
+  res.render('stones/index', { stones, colorc });
 };
 
 module.exports.leaderBoard = async (req, res) => {
-  res.render('stones/leaderboard');
+  const users = await User.find({}).sort({ score: -1, lastSubmission: 1 });
+  res.render('stones/leaderboard', { users });
 };
 
 module.exports.submitAnswer = async (req, res) => {
-  const stone = Stone.findById(req.params.id);
-  const user = User.count({ _id: req.user._id });
-  if (req.query.answer == stone.solution) {
-    let time = new Date();
-    stone.submissions.push({ user: req.user._id, time });
-    user.submissions.push(stone._id);
-    user.lastSubmissionn = time;
-    user.score += stone.reward;
-    stone.save();
-    user.save();
-    res.json({
-      success: true,
-      message: `Your Answer was correct! You have won ${stone.reward} points.`,
-    });
-  } else res.json({ success: true });
+  const stone = await Stone.findById(req.params.id);
+  const userc = await User.findOne({
+    _id: req.user._id,
+    submissions: stone._id,
+  });
+  if (!userc) {
+    if (req.body.AnswerStone == stone.solution) {
+      let time = new Date();
+      stone.submissions.push({ user: req.user._id, time });
+      const user = await User.findOne({
+        _id: req.user._id,
+      });
+      user.submissions.push(stone._id);
+      user.lastSubmission = time;
+      user.score += stone.reward;
+      await stone.save();
+      await user.save();
+      req.flash(
+        'success',
+        `Your Answer was correct! You have successfully claimed ${stone.name}.`,
+      );
+      res.redirect('/stones');
+    } else {
+      req.flash('error', `Your Answer was incorrect.`);
+      res.redirect('/stones');
+    }
+  } else {
+    req.flash('error', 'You have already claimed the stone.');
+    res.redirect('/stones');
+  }
 };

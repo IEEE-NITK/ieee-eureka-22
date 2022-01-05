@@ -14,7 +14,7 @@ module.exports.createUser = async (req, res) => {
       if (err) return next(err);
       req.flash('success', 'Welcome to IEEE-Eureka');
       delete req.session.returnTo;
-      res.redirect('/home');
+      res.redirect('/stones');
     });
   } catch (e) {
     req.flash('error', e.message);
@@ -28,7 +28,7 @@ module.exports.renderLogin = (req, res) => {
 
 module.exports.loginUser = (req, res) => {
   req.flash('success', 'Welcome Back');
-  const redirectUrl = req.session.returnTo || '/home';
+  const redirectUrl = req.session.returnTo || '/stones';
   res.redirect(redirectUrl);
 };
 

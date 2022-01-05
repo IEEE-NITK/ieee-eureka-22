@@ -12,9 +12,8 @@ router.route('/').get(catchAsync(stones.index)).post(
   /* validateCampground, */
   catchAsync(stones.postAnswer),
 );
-
 router.get('/leaderboard', catchAsync(stones.leaderBoard));
 
-router.route('/:id').post(catchAsync(stones.validateSolution));
+router.route('/:id').post(catchAsync(stones.submitAnswer));
 
 module.exports = router;

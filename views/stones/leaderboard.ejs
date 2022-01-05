@@ -7,25 +7,19 @@
         <tr>
           <th scope="col">#</th>
           <th scope="col">Team Username</th>
+          <th scope="col">Last Submission</th>
           <th scope="col">Score</th>
         </tr>
       </thead>
       <tbody>
+        <% for (let i in users) {%>
         <tr>
-          <th scope="row">1</th>
-          <td>Octopus Throwers</td>
-          <td>69</td>
+          <th scope="row"><%= Number(i)+Number(1) %></th>
+          <td><%= users[i].username %></td>
+          <td><%= users[i].lastSubmission %></td>
+          <td><%= users[i].score %></td>
         </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>ECE bruuhhhers</td>
-          <td>45</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Maggiedox</td>
-          <td>32</td>
-        </tr>
+        <%} %>
       </tbody>
     </table>
   </div>
