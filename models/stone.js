@@ -7,7 +7,6 @@ const stoneSchema = new Schema({
   body: String,
   imageURL: String,
   filelink: String,
-  Filerequired: Boolean,
   hint: String,
   reward: Number,
   solution: String,

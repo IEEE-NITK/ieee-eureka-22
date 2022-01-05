@@ -14,8 +14,17 @@ module.exports.index = async (req, res) => {
   res.render('stones/index', { stones, colorc });
 };
 
+module.exports.renderNewForm = async (req, res) => {
+  res.render('stones/new');
+};
+
 module.exports.leaderBoard = async (req, res) => {
-  const users = await User.find({}).sort({ score: -1, lastSubmission: 1 });
+  const users = await User.find({ username: { $ne: 'admin' } })
+    .sort({
+      score: -1,
+      lastSubmission: 1,
+    })
+    .select('-solution');
   res.render('stones/leaderboard', { users });
 };
 
@@ -50,4 +59,27 @@ module.exports.submitAnswer = async (req, res) => {
     req.flash('error', 'You have already claimed the stone.');
     res.redirect('/stones');
   }
+};
+
+module.exports.createStone = async (req, res, next) => {
+  const stoneobj = {
+    name: req.body.name,
+    title: req.body.title,
+    body: req.body.body,
+    imageURL: req.body.imageURL,
+    filelink: req.body.filelink,
+    hint: req.body.hint,
+    solution: req.body.solution,
+    reward: 1,
+  };
+  const stone = new Stone(stoneobj);
+  await stone.save();
+  req.flash('success', 'Successfully made a new stone');
+  res.redirect(`/stones`);
+};
+module.exports.deleteStone = async (req, res) => {
+  const { id } = req.params;
+  await Stone.findByIdAndDelete(id);
+  req.flash('success', 'Successfully deleted Stone. :(');
+  res.redirect(`/stones`);
 };

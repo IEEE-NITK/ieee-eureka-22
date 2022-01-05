@@ -2,8 +2,15 @@
   <div class="allnav">
     <h3 class="float-md-left mb-0">IEEE-NITK</h3>
     <nav class="nav nav-masthead justify-content-center float-md-right">
+      <a class="nav-link" aria-current="page" href="#"
+        ><%= currentUser.username %></a
+      >
       <a class="nav-link" aria-current="page" href="/">Home</a>
+      <% if(currentUser) { %>
       <a class="nav-link" href="/stones">Stones</a>
+      <% } %> <%if (currentUser && currentUser.username==="admin") { %>
+      <a class="nav-link" href="/stones/new">new Stone</a>
+      <% } %>
       <a class="nav-link" href="/stones/leaderboard">leaderboard</a>
       <% if(!currentUser) { %>
       <a class="nav-link" href="/login">Login</a>

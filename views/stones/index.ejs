@@ -8,7 +8,7 @@
     <br />
     <div class="container d-flex flex-wrap justify-content-around" style="">
       <% for (let i in stones) {%>
-      <div class="card text-white <%= colorc[i] %> mb-3" style="max-width: 18rem">
+      <div class="card text-white <%= colorc[i%6] %> mb-3" style="max-width: 18rem">
         <div class="card-header">
           <a
             href="#"
@@ -59,11 +59,17 @@
                   />
                   <p class="card-text"><%= stones[i].body %>
                   </p>
-                  <% if(stones[i].Filerequired > 0) { %>  
+                  <% if(stones[i].filelink) { %>  
                   <a href="<%= stones[i].filelink %>">File link</a>
                   <% } %>  
                   <p class="card-text">Hint: <%= stones[i].hint %>
                   </p>
+                  
+                  <%if (currentUser && currentUser.username==="admin") { %>
+                    <form class=" d-inline" action="/stones/<%= stones[i]._id %>?_method=DELETE" method="POST">
+                      <button class="btn btn-danger">Delete Stone</button>
+                    </form>
+                    <% } %>  
                   <form action="/stones/<%= stones[i]._id %>/" method="POST" class='validated-form' novalidate>
                     <div class="form-group">
                       <label for="AnswerStone">Answer</label>

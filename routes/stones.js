@@ -5,15 +5,21 @@ const stones = require('../controllers/stones');
 
 /* const { stoneSchema } = require('../schemas'); */
 
-const { isLoggedIn } = require('../middleware');
+const { isLoggedIn, isAdmin } = require('../middleware');
 
-router.route('/').get(catchAsync(stones.index)).post(
-  isLoggedIn,
-  /* validateCampground, */
-  catchAsync(stones.postAnswer),
-);
+router
+  .route('/')
+  .get(isLoggedIn, catchAsync(stones.index))
+  .post(isLoggedIn, catchAsync(stones.postAnswer));
 router.get('/leaderboard', catchAsync(stones.leaderBoard));
 
-router.route('/:id').post(catchAsync(stones.submitAnswer));
+router
+  .route('/new')
+  .get(isLoggedIn, isAdmin, catchAsync(stones.renderNewForm))
+  .post(isLoggedIn, isAdmin, catchAsync(stones.createStone));
 
+router
+  .route('/:id')
+  .post(isLoggedIn, catchAsync(stones.submitAnswer))
+  .delete(isLoggedIn, isAdmin, catchAsync(stones.deleteStone));
 module.exports = router;
