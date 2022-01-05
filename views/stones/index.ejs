@@ -22,8 +22,7 @@
         <div class="card-body">
           <h5 class="card-title"><%= stones[i].title %></h5>
           <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            <%= stones[i].text %>
           </p>
           <div
             class="modal fade"
@@ -60,7 +59,7 @@
                   <p class="card-text"><%= stones[i].body %>
                   </p>
                   <% if(stones[i].filelink) { %>  
-                  <a href="<%= stones[i].filelink %>">File link</a>
+                  <a href="<%= stones[i].filelink %>" target="_blank">File link</a>
                   <% } %>  
                   <p class="card-text">Hint: <%= stones[i].hint %>
                   </p>

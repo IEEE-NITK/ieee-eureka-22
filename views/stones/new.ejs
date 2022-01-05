@@ -9,11 +9,10 @@
         <div class="bg-dark card-body">
           <h1 class="text-center">New Stone</h1>
           <form
-            action="/stones"
+            action="/stones/new"
             method="POST"
-            novalidate
             class="needs-validation"
-            enctype="multipart/form-data"
+            novalidate
           >
             <div class="mb-3">
               <label class="form-label" for="name">Stone Name</label>
@@ -21,7 +20,7 @@
                 class="form-control"
                 type="text"
                 id="name"
-                name="name"
+                name="stone[name]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>
@@ -32,7 +31,18 @@
                 class="form-control"
                 type="text"
                 id="title"
-                name="title"
+                name="stone[title]"
+                required
+              />
+              <div class="valid-feedback">Looks Good</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="test">Short text</label>
+              <input
+                class="form-control"
+                type="text"
+                id="test"
+                name="stone[text]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>
@@ -43,7 +53,7 @@
                 class="form-control"
                 id="description"
                 rows="3"
-                name="body"
+                name="stone[body]"
                 required
               ></textarea>
               <div class="valid-feedback">Looks Good</div>
@@ -54,7 +64,7 @@
                 class="form-control"
                 type="text"
                 id="imageURL"
-                name="imageURL"
+                name="stone[imageURL]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>
@@ -65,7 +75,7 @@
                 class="form-control"
                 type="text"
                 id="filelink"
-                name="filelink"
+                name="stone[filelink]"
               />
               <div class="valid-feedback">Looks Good</div>
             </div>
@@ -75,7 +85,7 @@
                 class="form-control"
                 type="text"
                 id="hint"
-                name="hint"
+                name="stone[hint]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>
@@ -86,7 +96,7 @@
                 class="form-control"
                 type="text"
                 id="solution"
-                name="solution"
+                name="stone[solution]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>

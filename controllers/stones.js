@@ -62,21 +62,12 @@ module.exports.submitAnswer = async (req, res) => {
 };
 
 module.exports.createStone = async (req, res, next) => {
-  const stoneobj = {
-    name: req.body.name,
-    title: req.body.title,
-    body: req.body.body,
-    imageURL: req.body.imageURL,
-    filelink: req.body.filelink,
-    hint: req.body.hint,
-    solution: req.body.solution,
-    reward: 1,
-  };
-  const stone = new Stone(stoneobj);
+  const stone = new Stone(req.body.stone);
   await stone.save();
   req.flash('success', 'Successfully made a new stone');
   res.redirect(`/stones`);
 };
+
 module.exports.deleteStone = async (req, res) => {
   const { id } = req.params;
   await Stone.findByIdAndDelete(id);

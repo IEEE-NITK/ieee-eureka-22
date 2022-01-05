@@ -3,12 +3,16 @@ const Schema = mongoose.Schema;
 const User = require('./user');
 const stoneSchema = new Schema({
   name: String,
+  text: String,
   title: String,
   body: String,
   imageURL: String,
   filelink: String,
   hint: String,
-  reward: Number,
+  reward: {
+    type: Number,
+    default: 1,
+  },
   solution: String,
   submissions: [
     {
