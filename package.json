@@ -12,6 +12,7 @@
     "express": "^4.17.2",
     "express-mongo-sanitize": "^2.1.0",
     "express-session": "^1.17.2",
+    "https": "^1.0.0",
     "joi": "^17.5.0",
     "method-override": "^3.0.0",
     "mongoose": "^6.1.4",
