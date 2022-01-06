@@ -6,6 +6,7 @@ const app = express();
 
 const https = require('https');
 const fs = require('fs');
+const http = require('http');
 
 const mongoSanitize = require('express-mongo-sanitize');
 
@@ -33,6 +34,12 @@ const secretCode = process.env.SECRET;
 // 'mongodb://localhost:27017/yelp-camp' or process.env.DB_URL depending on localhost or atlas
 
 mongoose.connect(dbUrl).then(console.log('mongo success'));
+
+app.enable('trust proxy');
+app.use((req, res, next) => {
+  req.secure ? next() : res.redirect('https://' + req.headers.host + req.url);
+});
+
 app.use(methodOverride('_method'));
 
 app.use(express.urlencoded({ extended: true }));
@@ -105,4 +112,10 @@ const httpsServer = https.createServer(
 
 httpsServer.listen(port, () => {
   console.log('HTTPS Server running on port 443');
+});
+
+const httpServer = http.createServer(app);
+
+httpServer.listen(80, () => {
+  console.log('HTTP Server running on port 80');
 });
