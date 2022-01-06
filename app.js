@@ -4,6 +4,9 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const app = express();
 
+const https = require('https');
+const fs = require('fs');
+
 const mongoSanitize = require('express-mongo-sanitize');
 
 const path = require('path');
@@ -90,7 +93,16 @@ app.use((err, req, res, next) => {
   if (!err.message) err.message = 'Oh no,Something went wrong.';
   res.status(statusCode).render('error', { err });
 });
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log(`connection successfull at port:${[port]}`);
+const port = 443;
+
+const httpsServer = https.createServer(
+  {
+    key: fs.readFileSync('/etc/letsencrypt/live/eureka-22.tk/privkey.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/eureka-22.tk/fullchain.pem'),
+  },
+  app,
+);
+
+httpsServer.listen(port, () => {
+  console.log('HTTPS Server running on port 443');
 });
