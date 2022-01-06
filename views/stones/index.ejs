@@ -14,7 +14,7 @@
             href="#"
             class="link-light text-decoration-none"
             data-toggle="modal"
-            data-target="#exampleModalCenter"
+            data-target="#exampleModalCenter<%= i%>"
           >
           <%= stones[i].name %>
           </a>
@@ -26,7 +26,7 @@
           </p>
           <div
             class="modal fade"
-            id="exampleModalCenter"
+            id="exampleModalCenter<%= i%>"
             tabindex="-1"
             role="dialog"
             aria-labelledby="exampleModalCenterTitle"
