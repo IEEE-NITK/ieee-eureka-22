@@ -10,7 +10,8 @@ module.exports.index = async (req, res) => {
     res.render('stones/countdown');
   } else {
     let time_remaining = time_end - time_current;
-    const stones = await Stone.find({});
+    const stones = await Stone.find({}).populate('submissions.user');
+    console.log(stones[0].submissions[0].user.username);
     const colorc = [
       'bg-info',
       'bg-primary',
