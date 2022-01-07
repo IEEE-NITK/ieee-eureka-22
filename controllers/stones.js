@@ -40,10 +40,10 @@ module.exports.leaderBoard = async (req, res) => {
 
 module.exports.submitAnswer = async (req, res) => {
   let time_current = new Date().getTime();
-  if (time_start > time_current) {
+  if (req.user.username != 'admin' && time_start > time_current) {
     req.flash('error', 'Please Wait for the event to start');
     res.redirect('/stones');
-  } else if (time_end < time_current) {
+  } else if (req.user.username != 'admin' && time_end < time_current) {
     req.flash('error', 'You cannot submit anymore, The event is over.');
     res.redirect('/stones');
   }

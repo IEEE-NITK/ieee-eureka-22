@@ -2,7 +2,12 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const stones = require('../controllers/stones');
-const { isLoggedIn, isAdmin, validateSolution } = require('../middleware');
+const {
+  isLoggedIn,
+  isAdmin,
+  validateSolution,
+  validateStone,
+} = require('../middleware');
 
 router
   .route('/')
@@ -13,7 +18,7 @@ router.get('/leaderboard', catchAsync(stones.leaderBoard));
 router
   .route('/new')
   .get(isLoggedIn, isAdmin, catchAsync(stones.renderNewForm))
-  .post(isLoggedIn, isAdmin, catchAsync(stones.createStone));
+  .post(isLoggedIn, isAdmin, validateStone, catchAsync(stones.createStone));
 
 router
   .route('/:id')

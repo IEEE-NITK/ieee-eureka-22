@@ -1,5 +1,5 @@
 const ExpressError = require('./utils/ExpressError');
-const { solutionSchema } = require('./schemas');
+const { solutionSchema, stoneSchema } = require('./schemas');
 
 module.exports.isLoggedIn = function (req, res, next) {
   req.session.returnTo = req.originalUrl;
@@ -11,6 +11,15 @@ module.exports.isLoggedIn = function (req, res, next) {
 };
 module.exports.validateSolution = (req, res, next) => {
   const { error } = solutionSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message).join(',');
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
+module.exports.validateStone = (req, res, next) => {
+  const { error } = stoneSchema.validate(req.body);
   if (error) {
     const msg = error.details.map((el) => el.message).join(',');
     throw new ExpressError(msg, 400);
