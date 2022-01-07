@@ -1,17 +1,26 @@
 const Stone = require('../models/stone');
 const User = require('../models/user');
 
+let time_start = new Date('Jan 10, 2022 18:00:00').getTime();
+let time_end = new Date('Jan 11, 2022 00:00:00').getTime();
+
 module.exports.index = async (req, res) => {
-  const stones = await Stone.find({});
-  const colorc = [
-    'bg-info',
-    'bg-primary',
-    'bg-secondary',
-    'bg-success',
-    'bg-danger',
-    'bg-warning',
-  ];
-  res.render('stones/index', { stones, colorc });
+  let time_current = new Date().getTime();
+  if (req.user.username != 'admin' && time_current < time_start) {
+    res.render('stones/countdown');
+  } else {
+    let time_remaining = time_end - time_current;
+    const stones = await Stone.find({});
+    const colorc = [
+      'bg-info',
+      'bg-primary',
+      'bg-secondary',
+      'bg-success',
+      'bg-danger',
+      'bg-warning',
+    ];
+    res.render('stones/index', { stones, colorc, time_remaining });
+  }
 };
 
 module.exports.renderNewForm = async (req, res) => {
@@ -29,6 +38,14 @@ module.exports.leaderBoard = async (req, res) => {
 };
 
 module.exports.submitAnswer = async (req, res) => {
+  let time_current = new Date().getTime();
+  if (time_start > time_current) {
+    req.flash('error', 'Please Wait for the event to start');
+    res.redirect('/stones');
+  } else if (time_end < time_current) {
+    req.flash('error', 'You cannot submit anymore, The event is over.');
+    res.redirect('/stones');
+  }
   const stone = await Stone.findById(req.params.id);
   const userc = await User.findOne({
     _id: req.user._id,
