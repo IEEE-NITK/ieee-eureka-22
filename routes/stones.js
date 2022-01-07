@@ -2,10 +2,7 @@ const express = require('express');
 const router = express.Router();
 const catchAsync = require('../utils/catchAsync');
 const stones = require('../controllers/stones');
-
-/* const { stoneSchema } = require('../schemas'); */
-
-const { isLoggedIn, isAdmin } = require('../middleware');
+const { isLoggedIn, isAdmin, validateSolution } = require('../middleware');
 
 router
   .route('/')
@@ -20,6 +17,6 @@ router
 
 router
   .route('/:id')
-  .post(isLoggedIn, catchAsync(stones.submitAnswer))
+  .post(isLoggedIn, validateSolution, catchAsync(stones.submitAnswer))
   .delete(isLoggedIn, isAdmin, catchAsync(stones.deleteStone));
 module.exports = router;

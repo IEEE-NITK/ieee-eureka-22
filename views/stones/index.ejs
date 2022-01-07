@@ -63,7 +63,23 @@
                   <% } %>  
                   <p class="card-text">Hint: <%= stones[i].hint %>
                   </p>
-                  
+                    <table class="table">
+                      <thead class="thead-dark">
+                        <tr><th colspan="2">Submissions</th></tr>
+                        <tr>
+                          <th scope="col">Team Username</th>
+                          <th scope="col">Submission Time</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <% for (let submission of stones[i].submissions) {%>
+                        <tr>
+                          <td><%= submission.user.username %></td>
+                          <td><%= submission.time %></td>
+                        </tr>
+                        <%} %>
+                      </tbody>
+                    </table> 
                   <%if (currentUser && currentUser.username==="admin") { %>
                     <form class=" d-inline" action="/stones/<%= stones[i]._id %>?_method=DELETE" method="POST">
                       <button class="btn btn-danger">Delete Stone</button>

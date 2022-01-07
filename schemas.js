@@ -24,6 +24,6 @@ const extension = (joi) => ({
 
 const Joi = BaseJoi.extend(extension);
 
-module.exports.stoneSchema = Joi.object({
-  answer: Joi.string().required().escapeHTML(),
+module.exports.solutionSchema = Joi.object({
+  AnswerStone: Joi.string().required().escapeHTML(),
 });

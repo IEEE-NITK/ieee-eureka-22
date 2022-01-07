@@ -16,7 +16,7 @@ const stoneSchema = new Schema({
   solution: String,
   submissions: [
     {
-      users: {
+      user: {
         type: Schema.Types.ObjectId,
         ref: 'User',
       },
