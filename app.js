@@ -85,6 +85,7 @@ app.use((req, res, next) => {
   res.locals.currentUser = req.user || 0;
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  res.locals.current_url = req.url;
   next();
 });
 app.get('/', (req, res) => {
