@@ -3,9 +3,9 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const express = require('express');
 const app = express();
-/* 
+
 const https = require('https');
-const fs = require('fs'); */
+const fs = require('fs');
 const http = require('http');
 
 const mongoSanitize = require('express-mongo-sanitize');
@@ -18,7 +18,6 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 
 const flash = require('connect-flash');
-const Joi = require('joi');
 
 const methodOverride = require('method-override');
 const ExpressError = require('./utils/ExpressError');
@@ -35,12 +34,12 @@ const secretCode = process.env.SECRET;
 // 'mongodb://localhost:27017/yelp-camp' or process.env.DB_URL depending on localhost or atlas
 
 mongoose.connect(dbUrl).then(console.log('mongo success'));
-/* 
+
 app.enable('trust proxy');
 app.use((req, res, next) => {
   req.secure ? next() : res.redirect('https://' + req.headers.host + req.url);
 });
- */
+
 app.use(methodOverride('_method'));
 
 app.use(express.urlencoded({ extended: true }));
@@ -67,8 +66,8 @@ const sessionConfig = {
   resave: false,
   saveUninitialized: true,
   cookie: {
-    httpOnly: true,
-    /* secure:true,  for Https*/
+    /* httpOnly: true, */
+    secure: true /* for Https */,
     expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
@@ -103,7 +102,7 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render('error', { err });
 });
 const port = 443;
-/* 
+
 const httpsServer = https.createServer(
   {
     key: fs.readFileSync('/etc/letsencrypt/live/eureka-22.tk/privkey.pem'),
@@ -114,7 +113,7 @@ const httpsServer = https.createServer(
 
 httpsServer.listen(port, () => {
   console.log('HTTPS Server running on port 443');
-}); */
+});
 
 const httpServer = http.createServer(app);
 
