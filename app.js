@@ -91,6 +91,9 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   res.render('home');
 });
+app.get('/more', (req, res) => {
+  res.render('more');
+});
 app.use('/', userRoutes);
 app.use('/stones', stoneRoutes);
 app.all('*', (req, res, next) => {
