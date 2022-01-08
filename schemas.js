@@ -35,7 +35,7 @@ module.exports.stoneSchema = Joi.object({
     text: Joi.string().required().escapeHTML(),
     body: Joi.string().required().escapeHTML(),
     imageURL: Joi.string().uri().required().escapeHTML(),
-    filelink: Joi.string().uri().escapeHTML(),
+    filelink: Joi.string().uri().optional().escapeHTML(),
     hint: Joi.string().required().escapeHTML(),
     solution: Joi.string().required().escapeHTML(),
   }),
