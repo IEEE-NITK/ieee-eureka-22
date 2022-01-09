@@ -40,3 +40,18 @@ module.exports.stoneSchema = Joi.object({
     solution: Joi.string().required().escapeHTML(),
   }),
 });
+
+module.exports.userSchema = Joi.object({
+  stone: Joi.object({
+    username: Joi.string().required().escapeHTML(),
+    password: Joi.string().required().escapeHTML(),
+    team_member_1: {
+      name: Joi.string().required().escapeHTML(),
+      roll_no: Joi.string().required().escapeHTML(),
+    },
+    team_member_2: {
+      name: Joi.string().optional().allow('').escapeHTML(),
+      roll_no: Joi.string().optional().allow('').escapeHTML(),
+    },
+  }),
+});
