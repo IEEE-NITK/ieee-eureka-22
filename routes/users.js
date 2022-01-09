@@ -8,13 +8,12 @@ const { validateUser } = require('../middleware');
 router
   .route('/register')
   .get(users.renderRegister)
-  .post(catchAsync(users.createUser));
+  .post(validateUser, catchAsync(users.createUser));
 
 router
   .route('/login')
   .get(users.renderLogin)
   .post(
-    validateUser,
     passport.authenticate('local', {
       failureFlash: true,
       failureRedirect: '/login',
