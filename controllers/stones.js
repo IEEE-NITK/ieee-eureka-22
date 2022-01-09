@@ -6,7 +6,7 @@ let time_end = new Date('Jan 11, 2022 00:00:00').getTime();
 
 module.exports.index = async (req, res) => {
   let time_current = new Date().getTime();
-  if (req.user.username != 'admin' && time_current < time_start) {
+  if (req.user.username !== 'admin' && time_current < time_start) {
     res.render('stones/countdown');
   } else {
     let time_remaining = time_end - time_current;
@@ -39,10 +39,10 @@ module.exports.leaderBoard = async (req, res) => {
 
 module.exports.submitAnswer = async (req, res) => {
   let time_current = new Date().getTime();
-  if (req.user.username != 'admin' && time_start > time_current) {
+  if (req.user.username !== 'admin' && time_start > time_current) {
     req.flash('error', 'Please Wait for the event to start');
     res.redirect('/stones');
-  } else if (req.user.username != 'admin' && time_end < time_current) {
+  } else if (req.user.username !== 'admin' && time_end < time_current) {
     req.flash('error', 'You cannot submit anymore, The event is over.');
     res.redirect('/stones');
   }

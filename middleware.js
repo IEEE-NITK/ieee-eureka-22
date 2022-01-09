@@ -28,7 +28,7 @@ module.exports.validateStone = (req, res, next) => {
   }
 };
 module.exports.isAdmin = function (req, res, next) {
-  if (req.user.username != 'admin') {
+  if (req.user.username !== 'admin') {
     req.flash('error', 'you must be a admin to access this route');
     return res.redirect('/stones/leaderboard');
   }

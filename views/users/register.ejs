@@ -6,7 +6,7 @@
     <div class="col-md-6 offset-md-3 col-xl-4 offset-xl-4">
       <div class="bg-dark card shadow">
         <div class="bg-dark card-body">
-          <h5 class="card-title">Sign up</h5>
+          <h5 class="card-title">Register</h5>
           <form
             action="/register"
             method="POST"
@@ -14,7 +14,9 @@
             class="needs-validation"
           >
             <div class="mb-3">
-              <label class="form-label" for="username">Username</label>
+              <label class="form-label" for="username"
+                >Username (Team Name)</label
+              >
               <input
                 class="form-control bg-secondary text-white"
                 type="text"
@@ -31,6 +33,58 @@
                 type="password"
                 id="password"
                 name="password"
+                required
+              />
+              <div class="valid-feedback">Looks Good</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="team_member_1_name"
+                >Team Member 1: Name</label
+              >
+              <input
+                class="form-control bg-secondary text-white"
+                type="text"
+                id="team_member_1_name"
+                name="team_member_1[name]"
+                required
+              />
+              <div class="valid-feedback">Looks Good</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="team_member_1_roll_no"
+                >Team Member 1: Roll No</label
+              >
+              <input
+                class="form-control bg-secondary text-white"
+                type="text"
+                id="team_member_1_roll_no"
+                name="team_member_1[roll_no]"
+                required
+              />
+              <div class="valid-feedback">Looks Good</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="team_member_2_name"
+                >Team Member 2: Name</label
+              >
+              <input
+                class="form-control bg-secondary text-white"
+                type="text"
+                id="team_member_2_name"
+                name="team_member_2[name]"
+                required
+              />
+              <div class="valid-feedback">Looks Good</div>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="team_member_2_roll_no"
+                >Team Member 2: Roll No</label
+              >
+              <input
+                class="form-control bg-secondary text-white"
+                type="text"
+                id="team_member_2_roll_no"
+                name="team_member_2[roll_no]"
                 required
               />
               <div class="valid-feedback">Looks Good</div>

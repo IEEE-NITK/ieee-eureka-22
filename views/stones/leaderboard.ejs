@@ -15,7 +15,61 @@
         <% for (let i in users) {%>
         <tr>
           <th scope="row"><%= Number(i)+Number(1) %></th>
-          <td><%= users[i].username %></td>
+          <td>
+            <a
+              href="#"
+              class="text-decoration-none"
+              data-toggle="modal"
+              data-target="#exampleModalCenter<%= i %>"
+              ><%= users[i].username %></a
+            >
+          </td>
+          <div
+            class="modal fade"
+            id="exampleModalCenter<%= i %>"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalCenterTitle">
+                    <%= users[i].username %>
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body text-left">
+                  <b>Team Member 1</b><br />
+                  <%= users[i].team_member_1.name %>
+                  <span><%= users[i].team_member_1.roll_no %></span>
+                  <br />
+                  <% if(users[i].team_member_2) { %>
+                  <b>Team Member 2</b><br />
+                  <%= users[i].team_member_2.name %>
+                  <span> <%= users[i].team_member_2.roll_no %> </span><br />
+                  <% } %>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
           <td><%= users[i].lastSubmission %></td>
           <td><%= users[i].score %></td>
         </tr>
